@@ -1,0 +1,798 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AeropuertoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AE_BOLETOS_AVION">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="cod_vuelo" Type="int" Nullable="false" />
+          <Property Name="precio" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ind_estado" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="AE_CLASE">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="desc_clase" Type="varchar" MaxLength="1000" />
+          <Property Name="ind_estado" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="AE_COMPANIA">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="desc_compania" Type="varchar" MaxLength="1000" />
+          <Property Name="telefono" Type="int" />
+          <Property Name="ind_estado" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="AE_ESCALAS_VUELOS">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="cod_vuelo" Type="int" Nullable="false" />
+          <Property Name="cod_pais" Type="int" Nullable="false" />
+          <Property Name="duracion_escala" Type="varchar" MaxLength="50" />
+          <Property Name="fec_vuelo" Type="date" />
+          <Property Name="ind_estado" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="AE_PAGO_BOLETO">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="comprobante" Type="int" Nullable="false" />
+          <Property Name="cod_reserva" Type="int" Nullable="false" />
+          <Property Name="monto_boleto" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="impuesto" Type="int" />
+          <Property Name="ind_estado" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="AE_PAISES">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="desc_pais" Type="varchar" MaxLength="1000" />
+          <Property Name="ind_estado" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="AE_PASAJEROS">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="identificacion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="1000" />
+          <Property Name="pasaporte" Type="int" />
+          <Property Name="visa" Type="int" />
+          <Property Name="fec_nacimiento" Type="date" />
+          <Property Name="correo_electronico" Type="varchar" MaxLength="1000" />
+          <Property Name="telefono" Type="int" />
+          <Property Name="cod_estado" Type="int" />
+        </EntityType>
+        <EntityType Name="AE_RESERVA_BOLETO">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="cod_boleto" Type="int" Nullable="false" />
+          <Property Name="cod_pasajero" Type="int" Nullable="false" />
+          <Property Name="cod_clase" Type="int" Nullable="false" />
+          <Property Name="num_asiento" Type="varchar" MaxLength="5" />
+          <Property Name="ind_estado" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="AE_TIPOS_AVIONES">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="desc_avion" Type="varchar" MaxLength="1000" />
+          <Property Name="ind_estado" Type="varchar" MaxLength="5" />
+          <Property Name="asientos" Type="int" />
+        </EntityType>
+        <EntityType Name="AE_VUELOS">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="cod_compania" Type="int" Nullable="false" />
+          <Property Name="cod_pais_abordaje" Type="int" Nullable="false" />
+          <Property Name="cod_pais_destino" Type="int" Nullable="false" />
+          <Property Name="cod_avion" Type="int" Nullable="false" />
+          <Property Name="duracion" Type="varchar" MaxLength="50" />
+          <Property Name="fec_vuelo" Type="date" />
+          <Property Name="fec_salida" Type="datetime" />
+          <Property Name="fec_entrada" Type="datetime" />
+          <Property Name="ind_estado" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_AE_BOLETOS_AVION_AE_VUELOS">
+          <End Role="AE_VUELOS" Type="Self.AE_VUELOS" Multiplicity="1" />
+          <End Role="AE_BOLETOS_AVION" Type="Self.AE_BOLETOS_AVION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AE_VUELOS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AE_BOLETOS_AVION">
+              <PropertyRef Name="cod_vuelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AE_ESCALAS_VUELOS_AE_PAISES">
+          <End Role="AE_PAISES" Type="Self.AE_PAISES" Multiplicity="1" />
+          <End Role="AE_ESCALAS_VUELOS" Type="Self.AE_ESCALAS_VUELOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AE_PAISES">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AE_ESCALAS_VUELOS">
+              <PropertyRef Name="cod_pais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AE_ESCALAS_VUELOS_AE_VUELOS">
+          <End Role="AE_VUELOS" Type="Self.AE_VUELOS" Multiplicity="1" />
+          <End Role="AE_ESCALAS_VUELOS" Type="Self.AE_ESCALAS_VUELOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AE_VUELOS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AE_ESCALAS_VUELOS">
+              <PropertyRef Name="cod_vuelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AE_PAGO_BOLETO_AE_RESERVA_BOLETO">
+          <End Role="AE_RESERVA_BOLETO" Type="Self.AE_RESERVA_BOLETO" Multiplicity="1" />
+          <End Role="AE_PAGO_BOLETO" Type="Self.AE_PAGO_BOLETO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AE_RESERVA_BOLETO">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AE_PAGO_BOLETO">
+              <PropertyRef Name="cod_reserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AE_RESERVA_BOLETO_AE_BOLETOS_AVION">
+          <End Role="AE_BOLETOS_AVION" Type="Self.AE_BOLETOS_AVION" Multiplicity="1" />
+          <End Role="AE_RESERVA_BOLETO" Type="Self.AE_RESERVA_BOLETO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AE_BOLETOS_AVION">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AE_RESERVA_BOLETO">
+              <PropertyRef Name="cod_boleto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AE_RESERVA_BOLETO_AE_CLASE">
+          <End Role="AE_CLASE" Type="Self.AE_CLASE" Multiplicity="1" />
+          <End Role="AE_RESERVA_BOLETO" Type="Self.AE_RESERVA_BOLETO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AE_CLASE">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AE_RESERVA_BOLETO">
+              <PropertyRef Name="cod_clase" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AE_RESERVA_BOLETO_AE_PASAJEROS">
+          <End Role="AE_PASAJEROS" Type="Self.AE_PASAJEROS" Multiplicity="1" />
+          <End Role="AE_RESERVA_BOLETO" Type="Self.AE_RESERVA_BOLETO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AE_PASAJEROS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AE_RESERVA_BOLETO">
+              <PropertyRef Name="cod_pasajero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AE_VUELOS_AE_COMPANIA">
+          <End Role="AE_COMPANIA" Type="Self.AE_COMPANIA" Multiplicity="1" />
+          <End Role="AE_VUELOS" Type="Self.AE_VUELOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AE_COMPANIA">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AE_VUELOS">
+              <PropertyRef Name="cod_compania" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AE_VUELOS_AE_PAISES">
+          <End Role="AE_PAISES" Type="Self.AE_PAISES" Multiplicity="1" />
+          <End Role="AE_VUELOS" Type="Self.AE_VUELOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AE_PAISES">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AE_VUELOS">
+              <PropertyRef Name="cod_pais_abordaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AE_VUELOS_AE_PAISES1">
+          <End Role="AE_PAISES" Type="Self.AE_PAISES" Multiplicity="1" />
+          <End Role="AE_VUELOS" Type="Self.AE_VUELOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AE_PAISES">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AE_VUELOS">
+              <PropertyRef Name="cod_pais_destino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AE_VUELOS_AE_TIPOS_AVIONES">
+          <End Role="AE_TIPOS_AVIONES" Type="Self.AE_TIPOS_AVIONES" Multiplicity="1" />
+          <End Role="AE_VUELOS" Type="Self.AE_VUELOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AE_TIPOS_AVIONES">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AE_VUELOS">
+              <PropertyRef Name="cod_avion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AeropuertoModelStoreContainer">
+          <EntitySet Name="AE_BOLETOS_AVION" EntityType="Self.AE_BOLETOS_AVION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AE_CLASE" EntityType="Self.AE_CLASE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AE_COMPANIA" EntityType="Self.AE_COMPANIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AE_ESCALAS_VUELOS" EntityType="Self.AE_ESCALAS_VUELOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AE_PAGO_BOLETO" EntityType="Self.AE_PAGO_BOLETO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AE_PAISES" EntityType="Self.AE_PAISES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AE_PASAJEROS" EntityType="Self.AE_PASAJEROS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AE_RESERVA_BOLETO" EntityType="Self.AE_RESERVA_BOLETO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AE_TIPOS_AVIONES" EntityType="Self.AE_TIPOS_AVIONES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AE_VUELOS" EntityType="Self.AE_VUELOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AE_BOLETOS_AVION_AE_VUELOS" Association="Self.FK_AE_BOLETOS_AVION_AE_VUELOS">
+            <End Role="AE_VUELOS" EntitySet="AE_VUELOS" />
+            <End Role="AE_BOLETOS_AVION" EntitySet="AE_BOLETOS_AVION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AE_ESCALAS_VUELOS_AE_PAISES" Association="Self.FK_AE_ESCALAS_VUELOS_AE_PAISES">
+            <End Role="AE_PAISES" EntitySet="AE_PAISES" />
+            <End Role="AE_ESCALAS_VUELOS" EntitySet="AE_ESCALAS_VUELOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AE_ESCALAS_VUELOS_AE_VUELOS" Association="Self.FK_AE_ESCALAS_VUELOS_AE_VUELOS">
+            <End Role="AE_VUELOS" EntitySet="AE_VUELOS" />
+            <End Role="AE_ESCALAS_VUELOS" EntitySet="AE_ESCALAS_VUELOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AE_PAGO_BOLETO_AE_RESERVA_BOLETO" Association="Self.FK_AE_PAGO_BOLETO_AE_RESERVA_BOLETO">
+            <End Role="AE_RESERVA_BOLETO" EntitySet="AE_RESERVA_BOLETO" />
+            <End Role="AE_PAGO_BOLETO" EntitySet="AE_PAGO_BOLETO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AE_RESERVA_BOLETO_AE_BOLETOS_AVION" Association="Self.FK_AE_RESERVA_BOLETO_AE_BOLETOS_AVION">
+            <End Role="AE_BOLETOS_AVION" EntitySet="AE_BOLETOS_AVION" />
+            <End Role="AE_RESERVA_BOLETO" EntitySet="AE_RESERVA_BOLETO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AE_RESERVA_BOLETO_AE_CLASE" Association="Self.FK_AE_RESERVA_BOLETO_AE_CLASE">
+            <End Role="AE_CLASE" EntitySet="AE_CLASE" />
+            <End Role="AE_RESERVA_BOLETO" EntitySet="AE_RESERVA_BOLETO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AE_RESERVA_BOLETO_AE_PASAJEROS" Association="Self.FK_AE_RESERVA_BOLETO_AE_PASAJEROS">
+            <End Role="AE_PASAJEROS" EntitySet="AE_PASAJEROS" />
+            <End Role="AE_RESERVA_BOLETO" EntitySet="AE_RESERVA_BOLETO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AE_VUELOS_AE_COMPANIA" Association="Self.FK_AE_VUELOS_AE_COMPANIA">
+            <End Role="AE_COMPANIA" EntitySet="AE_COMPANIA" />
+            <End Role="AE_VUELOS" EntitySet="AE_VUELOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AE_VUELOS_AE_PAISES" Association="Self.FK_AE_VUELOS_AE_PAISES">
+            <End Role="AE_PAISES" EntitySet="AE_PAISES" />
+            <End Role="AE_VUELOS" EntitySet="AE_VUELOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AE_VUELOS_AE_PAISES1" Association="Self.FK_AE_VUELOS_AE_PAISES1">
+            <End Role="AE_PAISES" EntitySet="AE_PAISES" />
+            <End Role="AE_VUELOS" EntitySet="AE_VUELOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AE_VUELOS_AE_TIPOS_AVIONES" Association="Self.FK_AE_VUELOS_AE_TIPOS_AVIONES">
+            <End Role="AE_TIPOS_AVIONES" EntitySet="AE_TIPOS_AVIONES" />
+            <End Role="AE_VUELOS" EntitySet="AE_VUELOS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AeropuertoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AE_BOLETOS_AVION">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="cod_vuelo" Type="Int32" Nullable="false" />
+          <Property Name="precio" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ind_estado" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AE_VUELOS" Relationship="Self.FK_AE_BOLETOS_AVION_AE_VUELOS" FromRole="AE_BOLETOS_AVION" ToRole="AE_VUELOS" />
+          <NavigationProperty Name="AE_RESERVA_BOLETO" Relationship="Self.FK_AE_RESERVA_BOLETO_AE_BOLETOS_AVION" FromRole="AE_BOLETOS_AVION" ToRole="AE_RESERVA_BOLETO" />
+        </EntityType>
+        <EntityType Name="AE_CLASE">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="desc_clase" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ind_estado" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AE_RESERVA_BOLETO" Relationship="Self.FK_AE_RESERVA_BOLETO_AE_CLASE" FromRole="AE_CLASE" ToRole="AE_RESERVA_BOLETO" />
+        </EntityType>
+        <EntityType Name="AE_COMPANIA">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="desc_compania" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="Int32" />
+          <Property Name="ind_estado" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AE_VUELOS" Relationship="Self.FK_AE_VUELOS_AE_COMPANIA" FromRole="AE_COMPANIA" ToRole="AE_VUELOS" />
+        </EntityType>
+        <EntityType Name="AE_ESCALAS_VUELOS">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="cod_vuelo" Type="Int32" Nullable="false" />
+          <Property Name="cod_pais" Type="Int32" Nullable="false" />
+          <Property Name="duracion_escala" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fec_vuelo" Type="DateTime" Precision="0" />
+          <Property Name="ind_estado" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AE_PAISES" Relationship="Self.FK_AE_ESCALAS_VUELOS_AE_PAISES" FromRole="AE_ESCALAS_VUELOS" ToRole="AE_PAISES" />
+          <NavigationProperty Name="AE_VUELOS" Relationship="Self.FK_AE_ESCALAS_VUELOS_AE_VUELOS" FromRole="AE_ESCALAS_VUELOS" ToRole="AE_VUELOS" />
+        </EntityType>
+        <EntityType Name="AE_PAGO_BOLETO">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="comprobante" Type="Int32" Nullable="false" />
+          <Property Name="cod_reserva" Type="Int32" Nullable="false" />
+          <Property Name="monto_boleto" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="impuesto" Type="Int32" />
+          <Property Name="ind_estado" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AE_RESERVA_BOLETO" Relationship="Self.FK_AE_PAGO_BOLETO_AE_RESERVA_BOLETO" FromRole="AE_PAGO_BOLETO" ToRole="AE_RESERVA_BOLETO" />
+        </EntityType>
+        <EntityType Name="AE_PAISES">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="desc_pais" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ind_estado" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AE_ESCALAS_VUELOS" Relationship="Self.FK_AE_ESCALAS_VUELOS_AE_PAISES" FromRole="AE_PAISES" ToRole="AE_ESCALAS_VUELOS" />
+          <NavigationProperty Name="AE_VUELOS" Relationship="Self.FK_AE_VUELOS_AE_PAISES" FromRole="AE_PAISES" ToRole="AE_VUELOS" />
+          <NavigationProperty Name="AE_VUELOS1" Relationship="Self.FK_AE_VUELOS_AE_PAISES1" FromRole="AE_PAISES" ToRole="AE_VUELOS" />
+        </EntityType>
+        <EntityType Name="AE_PASAJEROS">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="identificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="pasaporte" Type="Int32" />
+          <Property Name="visa" Type="Int32" />
+          <Property Name="fec_nacimiento" Type="DateTime" Precision="0" />
+          <Property Name="correo_electronico" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="Int32" />
+          <Property Name="cod_estado" Type="Int32" />
+          <NavigationProperty Name="AE_RESERVA_BOLETO" Relationship="Self.FK_AE_RESERVA_BOLETO_AE_PASAJEROS" FromRole="AE_PASAJEROS" ToRole="AE_RESERVA_BOLETO" />
+        </EntityType>
+        <EntityType Name="AE_RESERVA_BOLETO">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="cod_boleto" Type="Int32" Nullable="false" />
+          <Property Name="cod_pasajero" Type="Int32" Nullable="false" />
+          <Property Name="cod_clase" Type="Int32" Nullable="false" />
+          <Property Name="num_asiento" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="ind_estado" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AE_BOLETOS_AVION" Relationship="Self.FK_AE_RESERVA_BOLETO_AE_BOLETOS_AVION" FromRole="AE_RESERVA_BOLETO" ToRole="AE_BOLETOS_AVION" />
+          <NavigationProperty Name="AE_CLASE" Relationship="Self.FK_AE_RESERVA_BOLETO_AE_CLASE" FromRole="AE_RESERVA_BOLETO" ToRole="AE_CLASE" />
+          <NavigationProperty Name="AE_PAGO_BOLETO" Relationship="Self.FK_AE_PAGO_BOLETO_AE_RESERVA_BOLETO" FromRole="AE_RESERVA_BOLETO" ToRole="AE_PAGO_BOLETO" />
+          <NavigationProperty Name="AE_PASAJEROS" Relationship="Self.FK_AE_RESERVA_BOLETO_AE_PASAJEROS" FromRole="AE_RESERVA_BOLETO" ToRole="AE_PASAJEROS" />
+        </EntityType>
+        <EntityType Name="AE_TIPOS_AVIONES">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="desc_avion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ind_estado" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="asientos" Type="Int32" />
+          <NavigationProperty Name="AE_VUELOS" Relationship="Self.FK_AE_VUELOS_AE_TIPOS_AVIONES" FromRole="AE_TIPOS_AVIONES" ToRole="AE_VUELOS" />
+        </EntityType>
+        <EntityType Name="AE_VUELOS">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="cod_compania" Type="Int32" Nullable="false" />
+          <Property Name="cod_pais_abordaje" Type="Int32" Nullable="false" />
+          <Property Name="cod_pais_destino" Type="Int32" Nullable="false" />
+          <Property Name="cod_avion" Type="Int32" Nullable="false" />
+          <Property Name="duracion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fec_vuelo" Type="DateTime" Precision="0" />
+          <Property Name="fec_salida" Type="DateTime" Precision="3" />
+          <Property Name="fec_entrada" Type="DateTime" Precision="3" />
+          <Property Name="ind_estado" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AE_BOLETOS_AVION" Relationship="Self.FK_AE_BOLETOS_AVION_AE_VUELOS" FromRole="AE_VUELOS" ToRole="AE_BOLETOS_AVION" />
+          <NavigationProperty Name="AE_COMPANIA" Relationship="Self.FK_AE_VUELOS_AE_COMPANIA" FromRole="AE_VUELOS" ToRole="AE_COMPANIA" />
+          <NavigationProperty Name="AE_ESCALAS_VUELOS" Relationship="Self.FK_AE_ESCALAS_VUELOS_AE_VUELOS" FromRole="AE_VUELOS" ToRole="AE_ESCALAS_VUELOS" />
+          <NavigationProperty Name="AE_PAISES" Relationship="Self.FK_AE_VUELOS_AE_PAISES" FromRole="AE_VUELOS" ToRole="AE_PAISES" />
+          <NavigationProperty Name="AE_PAISES1" Relationship="Self.FK_AE_VUELOS_AE_PAISES1" FromRole="AE_VUELOS" ToRole="AE_PAISES" />
+          <NavigationProperty Name="AE_TIPOS_AVIONES" Relationship="Self.FK_AE_VUELOS_AE_TIPOS_AVIONES" FromRole="AE_VUELOS" ToRole="AE_TIPOS_AVIONES" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_AE_BOLETOS_AVION_AE_VUELOS">
+          <End Role="AE_VUELOS" Type="Self.AE_VUELOS" Multiplicity="1" />
+          <End Role="AE_BOLETOS_AVION" Type="Self.AE_BOLETOS_AVION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AE_VUELOS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AE_BOLETOS_AVION">
+              <PropertyRef Name="cod_vuelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AE_RESERVA_BOLETO_AE_BOLETOS_AVION">
+          <End Role="AE_BOLETOS_AVION" Type="Self.AE_BOLETOS_AVION" Multiplicity="1" />
+          <End Role="AE_RESERVA_BOLETO" Type="Self.AE_RESERVA_BOLETO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AE_BOLETOS_AVION">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AE_RESERVA_BOLETO">
+              <PropertyRef Name="cod_boleto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AE_RESERVA_BOLETO_AE_CLASE">
+          <End Role="AE_CLASE" Type="Self.AE_CLASE" Multiplicity="1" />
+          <End Role="AE_RESERVA_BOLETO" Type="Self.AE_RESERVA_BOLETO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AE_CLASE">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AE_RESERVA_BOLETO">
+              <PropertyRef Name="cod_clase" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AE_VUELOS_AE_COMPANIA">
+          <End Role="AE_COMPANIA" Type="Self.AE_COMPANIA" Multiplicity="1" />
+          <End Role="AE_VUELOS" Type="Self.AE_VUELOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AE_COMPANIA">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AE_VUELOS">
+              <PropertyRef Name="cod_compania" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AE_ESCALAS_VUELOS_AE_PAISES">
+          <End Role="AE_PAISES" Type="Self.AE_PAISES" Multiplicity="1" />
+          <End Role="AE_ESCALAS_VUELOS" Type="Self.AE_ESCALAS_VUELOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AE_PAISES">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AE_ESCALAS_VUELOS">
+              <PropertyRef Name="cod_pais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AE_ESCALAS_VUELOS_AE_VUELOS">
+          <End Role="AE_VUELOS" Type="Self.AE_VUELOS" Multiplicity="1" />
+          <End Role="AE_ESCALAS_VUELOS" Type="Self.AE_ESCALAS_VUELOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AE_VUELOS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AE_ESCALAS_VUELOS">
+              <PropertyRef Name="cod_vuelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AE_PAGO_BOLETO_AE_RESERVA_BOLETO">
+          <End Role="AE_RESERVA_BOLETO" Type="Self.AE_RESERVA_BOLETO" Multiplicity="1" />
+          <End Role="AE_PAGO_BOLETO" Type="Self.AE_PAGO_BOLETO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AE_RESERVA_BOLETO">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AE_PAGO_BOLETO">
+              <PropertyRef Name="cod_reserva" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AE_VUELOS_AE_PAISES">
+          <End Role="AE_PAISES" Type="Self.AE_PAISES" Multiplicity="1" />
+          <End Role="AE_VUELOS" Type="Self.AE_VUELOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AE_PAISES">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AE_VUELOS">
+              <PropertyRef Name="cod_pais_abordaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AE_VUELOS_AE_PAISES1">
+          <End Role="AE_PAISES" Type="Self.AE_PAISES" Multiplicity="1" />
+          <End Role="AE_VUELOS" Type="Self.AE_VUELOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AE_PAISES">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AE_VUELOS">
+              <PropertyRef Name="cod_pais_destino" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AE_RESERVA_BOLETO_AE_PASAJEROS">
+          <End Role="AE_PASAJEROS" Type="Self.AE_PASAJEROS" Multiplicity="1" />
+          <End Role="AE_RESERVA_BOLETO" Type="Self.AE_RESERVA_BOLETO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AE_PASAJEROS">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AE_RESERVA_BOLETO">
+              <PropertyRef Name="cod_pasajero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AE_VUELOS_AE_TIPOS_AVIONES">
+          <End Role="AE_TIPOS_AVIONES" Type="Self.AE_TIPOS_AVIONES" Multiplicity="1" />
+          <End Role="AE_VUELOS" Type="Self.AE_VUELOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AE_TIPOS_AVIONES">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AE_VUELOS">
+              <PropertyRef Name="cod_avion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AeropuertoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AE_BOLETOS_AVION" EntityType="Self.AE_BOLETOS_AVION" />
+          <EntitySet Name="AE_CLASE" EntityType="Self.AE_CLASE" />
+          <EntitySet Name="AE_COMPANIA" EntityType="Self.AE_COMPANIA" />
+          <EntitySet Name="AE_ESCALAS_VUELOS" EntityType="Self.AE_ESCALAS_VUELOS" />
+          <EntitySet Name="AE_PAGO_BOLETO" EntityType="Self.AE_PAGO_BOLETO" />
+          <EntitySet Name="AE_PAISES" EntityType="Self.AE_PAISES" />
+          <EntitySet Name="AE_PASAJEROS" EntityType="Self.AE_PASAJEROS" />
+          <EntitySet Name="AE_RESERVA_BOLETO" EntityType="Self.AE_RESERVA_BOLETO" />
+          <EntitySet Name="AE_TIPOS_AVIONES" EntityType="Self.AE_TIPOS_AVIONES" />
+          <EntitySet Name="AE_VUELOS" EntityType="Self.AE_VUELOS" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_AE_BOLETOS_AVION_AE_VUELOS" Association="Self.FK_AE_BOLETOS_AVION_AE_VUELOS">
+            <End Role="AE_VUELOS" EntitySet="AE_VUELOS" />
+            <End Role="AE_BOLETOS_AVION" EntitySet="AE_BOLETOS_AVION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AE_RESERVA_BOLETO_AE_BOLETOS_AVION" Association="Self.FK_AE_RESERVA_BOLETO_AE_BOLETOS_AVION">
+            <End Role="AE_BOLETOS_AVION" EntitySet="AE_BOLETOS_AVION" />
+            <End Role="AE_RESERVA_BOLETO" EntitySet="AE_RESERVA_BOLETO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AE_RESERVA_BOLETO_AE_CLASE" Association="Self.FK_AE_RESERVA_BOLETO_AE_CLASE">
+            <End Role="AE_CLASE" EntitySet="AE_CLASE" />
+            <End Role="AE_RESERVA_BOLETO" EntitySet="AE_RESERVA_BOLETO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AE_VUELOS_AE_COMPANIA" Association="Self.FK_AE_VUELOS_AE_COMPANIA">
+            <End Role="AE_COMPANIA" EntitySet="AE_COMPANIA" />
+            <End Role="AE_VUELOS" EntitySet="AE_VUELOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AE_ESCALAS_VUELOS_AE_PAISES" Association="Self.FK_AE_ESCALAS_VUELOS_AE_PAISES">
+            <End Role="AE_PAISES" EntitySet="AE_PAISES" />
+            <End Role="AE_ESCALAS_VUELOS" EntitySet="AE_ESCALAS_VUELOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AE_ESCALAS_VUELOS_AE_VUELOS" Association="Self.FK_AE_ESCALAS_VUELOS_AE_VUELOS">
+            <End Role="AE_VUELOS" EntitySet="AE_VUELOS" />
+            <End Role="AE_ESCALAS_VUELOS" EntitySet="AE_ESCALAS_VUELOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AE_PAGO_BOLETO_AE_RESERVA_BOLETO" Association="Self.FK_AE_PAGO_BOLETO_AE_RESERVA_BOLETO">
+            <End Role="AE_RESERVA_BOLETO" EntitySet="AE_RESERVA_BOLETO" />
+            <End Role="AE_PAGO_BOLETO" EntitySet="AE_PAGO_BOLETO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AE_VUELOS_AE_PAISES" Association="Self.FK_AE_VUELOS_AE_PAISES">
+            <End Role="AE_PAISES" EntitySet="AE_PAISES" />
+            <End Role="AE_VUELOS" EntitySet="AE_VUELOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AE_VUELOS_AE_PAISES1" Association="Self.FK_AE_VUELOS_AE_PAISES1">
+            <End Role="AE_PAISES" EntitySet="AE_PAISES" />
+            <End Role="AE_VUELOS" EntitySet="AE_VUELOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AE_RESERVA_BOLETO_AE_PASAJEROS" Association="Self.FK_AE_RESERVA_BOLETO_AE_PASAJEROS">
+            <End Role="AE_PASAJEROS" EntitySet="AE_PASAJEROS" />
+            <End Role="AE_RESERVA_BOLETO" EntitySet="AE_RESERVA_BOLETO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AE_VUELOS_AE_TIPOS_AVIONES" Association="Self.FK_AE_VUELOS_AE_TIPOS_AVIONES">
+            <End Role="AE_TIPOS_AVIONES" EntitySet="AE_TIPOS_AVIONES" />
+            <End Role="AE_VUELOS" EntitySet="AE_VUELOS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AeropuertoModelStoreContainer" CdmEntityContainer="AeropuertoEntities">
+          <EntitySetMapping Name="AE_BOLETOS_AVION">
+            <EntityTypeMapping TypeName="AeropuertoModel.AE_BOLETOS_AVION">
+              <MappingFragment StoreEntitySet="AE_BOLETOS_AVION">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cod_vuelo" ColumnName="cod_vuelo" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="ind_estado" ColumnName="ind_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AE_CLASE">
+            <EntityTypeMapping TypeName="AeropuertoModel.AE_CLASE">
+              <MappingFragment StoreEntitySet="AE_CLASE">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="desc_clase" ColumnName="desc_clase" />
+                <ScalarProperty Name="ind_estado" ColumnName="ind_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AE_COMPANIA">
+            <EntityTypeMapping TypeName="AeropuertoModel.AE_COMPANIA">
+              <MappingFragment StoreEntitySet="AE_COMPANIA">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="desc_compania" ColumnName="desc_compania" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="ind_estado" ColumnName="ind_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AE_ESCALAS_VUELOS">
+            <EntityTypeMapping TypeName="AeropuertoModel.AE_ESCALAS_VUELOS">
+              <MappingFragment StoreEntitySet="AE_ESCALAS_VUELOS">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cod_vuelo" ColumnName="cod_vuelo" />
+                <ScalarProperty Name="cod_pais" ColumnName="cod_pais" />
+                <ScalarProperty Name="duracion_escala" ColumnName="duracion_escala" />
+                <ScalarProperty Name="fec_vuelo" ColumnName="fec_vuelo" />
+                <ScalarProperty Name="ind_estado" ColumnName="ind_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AE_PAGO_BOLETO">
+            <EntityTypeMapping TypeName="AeropuertoModel.AE_PAGO_BOLETO">
+              <MappingFragment StoreEntitySet="AE_PAGO_BOLETO">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="comprobante" ColumnName="comprobante" />
+                <ScalarProperty Name="cod_reserva" ColumnName="cod_reserva" />
+                <ScalarProperty Name="monto_boleto" ColumnName="monto_boleto" />
+                <ScalarProperty Name="impuesto" ColumnName="impuesto" />
+                <ScalarProperty Name="ind_estado" ColumnName="ind_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AE_PAISES">
+            <EntityTypeMapping TypeName="AeropuertoModel.AE_PAISES">
+              <MappingFragment StoreEntitySet="AE_PAISES">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="desc_pais" ColumnName="desc_pais" />
+                <ScalarProperty Name="ind_estado" ColumnName="ind_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AE_PASAJEROS">
+            <EntityTypeMapping TypeName="AeropuertoModel.AE_PASAJEROS">
+              <MappingFragment StoreEntitySet="AE_PASAJEROS">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="identificacion" ColumnName="identificacion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="pasaporte" ColumnName="pasaporte" />
+                <ScalarProperty Name="visa" ColumnName="visa" />
+                <ScalarProperty Name="fec_nacimiento" ColumnName="fec_nacimiento" />
+                <ScalarProperty Name="correo_electronico" ColumnName="correo_electronico" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="cod_estado" ColumnName="cod_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AE_RESERVA_BOLETO">
+            <EntityTypeMapping TypeName="AeropuertoModel.AE_RESERVA_BOLETO">
+              <MappingFragment StoreEntitySet="AE_RESERVA_BOLETO">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cod_boleto" ColumnName="cod_boleto" />
+                <ScalarProperty Name="cod_pasajero" ColumnName="cod_pasajero" />
+                <ScalarProperty Name="cod_clase" ColumnName="cod_clase" />
+                <ScalarProperty Name="num_asiento" ColumnName="num_asiento" />
+                <ScalarProperty Name="ind_estado" ColumnName="ind_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AE_TIPOS_AVIONES">
+            <EntityTypeMapping TypeName="AeropuertoModel.AE_TIPOS_AVIONES">
+              <MappingFragment StoreEntitySet="AE_TIPOS_AVIONES">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="desc_avion" ColumnName="desc_avion" />
+                <ScalarProperty Name="ind_estado" ColumnName="ind_estado" />
+                <ScalarProperty Name="asientos" ColumnName="asientos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AE_VUELOS">
+            <EntityTypeMapping TypeName="AeropuertoModel.AE_VUELOS">
+              <MappingFragment StoreEntitySet="AE_VUELOS">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cod_compania" ColumnName="cod_compania" />
+                <ScalarProperty Name="cod_pais_abordaje" ColumnName="cod_pais_abordaje" />
+                <ScalarProperty Name="cod_pais_destino" ColumnName="cod_pais_destino" />
+                <ScalarProperty Name="cod_avion" ColumnName="cod_avion" />
+                <ScalarProperty Name="duracion" ColumnName="duracion" />
+                <ScalarProperty Name="fec_vuelo" ColumnName="fec_vuelo" />
+                <ScalarProperty Name="fec_salida" ColumnName="fec_salida" />
+                <ScalarProperty Name="fec_entrada" ColumnName="fec_entrada" />
+                <ScalarProperty Name="ind_estado" ColumnName="ind_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="AeropuertoModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

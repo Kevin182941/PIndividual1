@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ecdbb8e3edfe40c7a962830f819be345" Name="Diagram1">
+        <EntityTypeShape EntityType="AeropuertoModel.AE_BOLETOS_AVION" Width="1.5" PointX="8.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="AeropuertoModel.AE_CLASE" Width="1.5" PointX="8.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AeropuertoModel.AE_COMPANIA" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AeropuertoModel.AE_ESCALAS_VUELOS" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AeropuertoModel.AE_PAGO_BOLETO" Width="1.5" PointX="12.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AeropuertoModel.AE_PAISES" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="AeropuertoModel.AE_PASAJEROS" Width="1.5" PointX="8.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AeropuertoModel.AE_RESERVA_BOLETO" Width="1.5" PointX="10.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AeropuertoModel.AE_TIPOS_AVIONES" Width="1.5" PointX="3.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AeropuertoModel.AE_VUELOS" Width="1.5" PointX="6" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="AeropuertoModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="AeropuertoModel.FK_AE_BOLETOS_AVION_AE_VUELOS" ManuallyRouted="false" />
+        <AssociationConnector Association="AeropuertoModel.FK_AE_RESERVA_BOLETO_AE_BOLETOS_AVION" ManuallyRouted="false" />
+        <AssociationConnector Association="AeropuertoModel.FK_AE_RESERVA_BOLETO_AE_CLASE" ManuallyRouted="false" />
+        <AssociationConnector Association="AeropuertoModel.FK_AE_VUELOS_AE_COMPANIA" ManuallyRouted="false" />
+        <AssociationConnector Association="AeropuertoModel.FK_AE_ESCALAS_VUELOS_AE_PAISES" ManuallyRouted="false" />
+        <AssociationConnector Association="AeropuertoModel.FK_AE_ESCALAS_VUELOS_AE_VUELOS" ManuallyRouted="false" />
+        <AssociationConnector Association="AeropuertoModel.FK_AE_PAGO_BOLETO_AE_RESERVA_BOLETO" ManuallyRouted="false" />
+        <AssociationConnector Association="AeropuertoModel.FK_AE_VUELOS_AE_PAISES" ManuallyRouted="false" />
+        <AssociationConnector Association="AeropuertoModel.FK_AE_VUELOS_AE_PAISES1" ManuallyRouted="false" />
+        <AssociationConnector Association="AeropuertoModel.FK_AE_RESERVA_BOLETO_AE_PASAJEROS" ManuallyRouted="false" />
+        <AssociationConnector Association="AeropuertoModel.FK_AE_VUELOS_AE_TIPOS_AVIONES" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
