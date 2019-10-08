@@ -4,4 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PIndividual.DAL\PIndividual.DAL.csproj" />
+  </ItemGroup>
+
 </Project>

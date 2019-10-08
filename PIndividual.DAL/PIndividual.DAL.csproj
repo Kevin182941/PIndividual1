@@ -94,6 +94,7 @@
       <DependentUpon>Aeropuerto.tt</DependentUpon>
     </Compile>
     <Compile Include="Class1.cs" />
+    <Compile Include="Logica.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>Aeropuerto.tt</DependentUpon>
