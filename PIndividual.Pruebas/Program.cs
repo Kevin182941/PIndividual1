@@ -26,7 +26,12 @@ namespace PIndividual.Pruebas
                 context.Students.Add(student);
                 context.SaveChanges();
             }
+
+            //Logica.EliminarAvion();
         }
+
+
+        
        /* public static void DataBaseFirst()
         {
             Logica p = new Logica();
