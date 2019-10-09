@@ -253,8 +253,34 @@ namespace PIndividual.BIN
                 Console.WriteLine("Error: " + exp.Message);
             }
         }
+        //public void SelectAvion()
+        //{
+        //    using (AeropuertoEntities context = new AeropuertoEntities())
+        //        try
+        //        {
+        //            var vuelos = context.AE_TIPOS_AVIONES.Where(x => x.id == 1).Select(e => new { xxx = e.desc_avion });
+        //            Console.WriteLine(xxx);
+        //        }
+        //        catch (Exception exp)
+        //        {
 
+        //            Console.WriteLine("Error: " + exp.Message);
+        //        }
+        //}
+        public static void EliminarAvion()
+        {
+            using (AeropuertoEntities context = new AeropuertoEntities())
+                try
+                {
+                    var vuelo = context.AE_TIPOS_AVIONES.Where(x => x.id == 1).SingleOrDefault();
+                    context.AE_TIPOS_AVIONES.Remove(vuelo);
+                    context.SaveChanges();
+                }
+                catch (Exception exp)
+                {
 
-
+                    Console.WriteLine("Error: " + exp.Message);
+                }
+        }
     }
 }
