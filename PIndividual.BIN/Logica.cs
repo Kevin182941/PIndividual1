@@ -236,6 +236,24 @@ namespace PIndividual.BIN
             return 1;
         }
 
+        /////////////////////////////
+
+        public void ModificarAvion()
+        {
+            using (AeropuertoEntities context = new AeropuertoEntities()) 
+            try
+            {
+                var vuelo = context.AE_TIPOS_AVIONES.Where(x => x.id == 1).SingleOrDefault();
+                vuelo.desc_avion = "cambio";
+                context.SaveChanges();
+            }
+            catch (Exception exp)
+            {
+
+                Console.WriteLine("Error: " + exp.Message);
+            }
+        }
+
 
 
     }
