@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PIndividual.BIN;
 using PIndividual.DAL.CF;
+using PIndividual.DAL.AE;
 
 namespace PIndividual.Pruebas
 {
@@ -12,20 +13,38 @@ namespace PIndividual.Pruebas
     {
         static void Main(string[] args)
         {
-            using (var context = new DBContextCF())
+            using (var context = new DBContextCFAE())
             {
-                Console.WriteLine("Adding new students");
+                Console.WriteLine("Adding new Avion");
 
-                var student = new Student
+                var avion = new Avion
                 {
-                    FirstMidName = "Alain",
-                    LastName = "Bomer",
-                    EnrollmentDate = DateTime.Parse(DateTime.Today.ToString())
-         
+                    IDAvion = 1,
+                    Descripcion = "Pruebas",
+                    Ind_estado = "Activo",
+                    Asientos = 25
+
                 };
-                context.Students.Add(student);
+                context.Aviones.Add(avion);
                 context.SaveChanges();
             }
+
+
+
+            //using (var context = new DBContextCF())
+            //{
+            //    Console.WriteLine("Adding new students");
+
+            //    var student = new Student
+            //    {
+            //        FirstMidName = "Alain",
+            //        LastName = "Bomer",
+            //        EnrollmentDate = DateTime.Parse(DateTime.Today.ToString())
+
+            //    };
+            //    context.Students.Add(student);
+            //    context.SaveChanges();
+            //}
 
             //Logica.EliminarAvion();
         }
