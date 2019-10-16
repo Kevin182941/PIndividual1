@@ -45,6 +45,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,26 +55,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connected Services\PrimerServicio\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Connected Services\PrimerServicio\PIndividual.Pruebas.PrimerServicio.HelloWorldResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\PrimerServicio\PrimerServicio.wsdl" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PIndividual.BIN\PIndividual.BIN.csproj">
-      <Project>{4607fa7e-ee96-4233-9000-5b2bd76780ef}</Project>
-      <Name>PIndividual.BIN</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PIndividual.DAL.AE\PIndividual.DAL.AE.csproj">
-      <Project>{158aa9c9-d812-4704-b8f4-4cb69d7b9822}</Project>
-      <Name>PIndividual.DAL.AE</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PIndividual.DAL.CF\PIndividual.DAL.CF.csproj">
-      <Project>{532fde83-e020-492b-b8f4-2858daebf35d}</Project>
-      <Name>PIndividual.DAL.CF</Name>
-    </ProjectReference>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\PrimerServicio\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PrimerServicio\PrimerServicio.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PrimerServicio\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PrimerServicio\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PrimerServicio\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

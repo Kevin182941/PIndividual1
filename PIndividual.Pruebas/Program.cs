@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PIndividual.BIN;
-using PIndividual.DAL.CF;
-using PIndividual.DAL.AE;
+using PIndividual.Pruebas.PrimerServicio;
 
 namespace PIndividual.Pruebas
 {
@@ -13,21 +11,26 @@ namespace PIndividual.Pruebas
     {
         static void Main(string[] args)
         {
-            using (var context = new DBContextCFAE())
-            {
-                Console.WriteLine("Adding new Avion");
 
-                var avion = new Avion
-                {
-                    IDAvion = 1,
-                    Descripcion = "Pruebas",
-                    Ind_estado = "Activo",
-                    Asientos = 25
+            PrimerServicioSoapClient cliente = new PrimerServicioSoapClient();
+            String respuesta = cliente.HelloWorld();
+            //using (var context = new DBContextCF())
+            //{
+            //    Console.WriteLine("Adding new Students");
 
-                };
-                context.Aviones.Add(avion);
-                context.SaveChanges();
-            }
+            //    var student = new Student
+            //    {
+                   
+            //        FirstMidName = "Pruebas",
+            //        LastName = "Activo",
+            //        EnrollmentDate = Convert.ToDateTime("01/01/2019")
+                    
+                 
+
+            //    };
+            //    context.Students.Add(student);
+            //    context.SaveChanges();
+        
 
 
 

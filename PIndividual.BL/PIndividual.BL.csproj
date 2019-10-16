@@ -8,8 +8,8 @@
     <ProjectGuid>{4607FA7E-EE96-4233-9000-5B2BD76780EF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PIndividual.BIN</RootNamespace>
-    <AssemblyName>PIndividual.BIN</AssemblyName>
+    <RootNamespace>PIndividual.BL</RootNamespace>
+    <AssemblyName>PIndividual.BL</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -56,14 +56,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\PIndividual.DAL\PIndividual.DAL.csproj">
       <Project>{bda6616b-efc2-40d8-9113-bc03a9de4f26}</Project>
       <Name>PIndividual.DAL</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

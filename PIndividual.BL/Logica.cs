@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PIndividual.DAL;
 
-namespace PIndividual.BIN
+namespace PIndividual.BL
 {
     public class Logica
     {
